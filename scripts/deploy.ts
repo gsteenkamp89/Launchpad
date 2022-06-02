@@ -21,7 +21,13 @@ const deploy = async (
   overrides = {},
   libraries = {}
 ) => {
-  console.log(`👀 Deploying: ${contractName}`);
+  console.log(
+    "-------------------------------------------\n",
+    `Deploying: ${chalk.green(contractName)}\n`,
+    `As ${chalk.green(constants.name)}\n`,
+    `To ${chalk.green(process.env.HARDHAT_NETWORK)}\n`,
+    "-------------------------------------------\n"
+  );
 
   const contractArgs = _args || [];
   const contractArtifacts = await ethers.getContractFactory(contractName, {
@@ -75,7 +81,8 @@ async function main() {
 
   const tokenDetails = {
     "Token Address:": MockERC20.contract.address,
-    Name: MockERC20.contract.name,
+    Name: constants.name,
+    Symbol: constants.symbol,
     "Deployer Balance": deployerBalance,
   };
 
